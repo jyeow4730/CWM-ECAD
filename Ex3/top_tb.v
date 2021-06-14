@@ -17,6 +17,8 @@ module top_tb(
 parameter CLK_PERIOD= 10;	// clock period set to 10 sim ticks
 
 //Todo: Registers and wires
+reg clk, rst, change, on_off;
+wire [7:0] counter_out;
 
 //Todo: Clock generation
 
@@ -25,5 +27,6 @@ parameter CLK_PERIOD= 10;	// clock period set to 10 sim ticks
 //Todo: Finish test, check for success
 
 //Todo: Instantiate counter module
+mymodule top(.clk(clk), .rst(rst),.change(change), .on_off(on_off), .counter_out(counter_out));
  
 endmodule 
