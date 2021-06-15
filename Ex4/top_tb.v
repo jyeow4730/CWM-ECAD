@@ -13,7 +13,8 @@ module top_tb();
 parameter CLK_PERIOD=10; // clock period set to 10 sim ticks
 
 // registers and wires
-reg rst, clk, button;
+reg rst, clk, button, err;
+reg [2:0] colour_prev;
 wire [2:0] colour;
 
 // clock generation
@@ -29,8 +30,46 @@ initial
 begin
     rst=1;
     button=1;
+    colour_prev=3'b001;
+    err=0;
 
-    # (CLK_PERIOD*5) rst=0;
+ # (CLK_PERIOD)
+if (colour!=3'b001)	// test reset
+    begin
+      $display("***TEST FAILED! :( ***");
+      err=1;
+    end
+
+# (CLK_PERIOD)
+rst=0;		// test button (hold colour)
+button=0;
+
+if (colour!= colour_prev)
+    begin
+      $display("***TEST FAILED!:( ***");
+      err=1;
+    end
+
+# (CLK_PERIOD) button=1;
+	
+forever		//test button
+  begin
+  # (CLK_PERIOD)
+  colour_prev= (colour_prev==3'b110)? 3'b001: colour_prev + 1;
+
+  if ((colour== 3'b000)||(colour==3'b111))		//test for unused states
+    begin
+    $display("***TEST FAILED! Unused state:( ***");
+    err=1;
+    end
+
+  if (colour!= colour_prev)
+    begin
+    $display("***TEST FAILED!:( ***");
+    err=1;
+    end
+
+end
 
 end
 
@@ -38,6 +77,8 @@ end
 initial
 begin
     # (CLK_PERIOD*60);		//sim time 600ns
+    if (err==0)
+       $display("***TEST PASSED! :) ***");
     $finish;
 end
 
