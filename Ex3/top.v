@@ -40,7 +40,7 @@ module monitor (
 	         	    counter_out <= counter_out +1;
 	     		else counter_out <= counter_out -1;
 
-		else ;
+		else counter_out<= counter_out;
 		    
       
 endmodule
