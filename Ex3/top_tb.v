@@ -40,24 +40,24 @@ begin
 
 # (CLK_PERIOD)
 
-if (counter_out !=0)
+if (counter_out !=0)		//check reset
 begin 
   $display("Test failed!");
   err=1;
 end
 
-rst=0;
+rst=0;			//check change
 
 # (CLK_PERIOD)
 if (counter_out !=0)
 begin 
-  $display("Test failed!");
+  $display("***TEST FAILED! :( ***");
   err=1;
 end
 
 change=1;
 
-forever
+forever 	// check on/off
 begin
 
 # (CLK_PERIOD)
@@ -66,7 +66,7 @@ counter_out_prev= on_off? counter_out_prev + 1: counter_out_prev -1;
 
 if (counter_out_prev!= counter_out)
   begin
-  $display("Test failed!");
+  $display("***TEST FAILED! :( ***");
   err=1;
   end
 
