@@ -23,6 +23,9 @@ module airconditioning(
 reg [1:0] state;
 wire heating, cooling;
 
+assign heating= state[1];
+assign cooling= state[0];
+
 always @ (posedge clk)
 begin
     
@@ -50,8 +53,7 @@ begin
      end
 end
 
-assign heating= state[1];
-assign cooling= state[0]; 
+ 
 
 endmodule
  

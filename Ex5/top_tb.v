@@ -21,7 +21,7 @@ wire heating, cooling;
 //clock generation
 initial
 begin 
-    clk= 0;
+    clk= 1;
     forever
       # (CLK_PERIOD/2) clk=~clk;
 end
