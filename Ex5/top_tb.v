@@ -36,6 +36,7 @@ begin
 
 forever
   begin
+
   # (CLK_PERIOD)
 
   if ((temperature==25) || (temperature==15))
@@ -51,25 +52,12 @@ forever
       err=1;
     end
 
-  if (dir)
+  if ((temperature==22)&& (cooling!=1))
+    begin
+      $display("***TEST FAILED!:( ***");
+      err=1;
+    end
 
-     if ((temperature <= 19) && (heating!=1))
-       begin
-       $display("***TEST FAILED!:( ***");
-       err=1;
-       end
-
-    else if ((temperature >= 22) && (cooling!=1))
-       begin
-       $display("***TEST FAILED!:( ***");
-       err=1;
-       end
-
-   else if ((temperature==21) && (cooling!=0) && (heating!=0))
-       begin
-       $display("***TEST FAILED!:( ***");
-       err=1;
-       end
 end
 end
 

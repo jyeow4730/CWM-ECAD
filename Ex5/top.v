@@ -31,8 +31,8 @@ begin
     
   if (state== 2'b00)		// idle state 
       begin
-       state = (temperature <= 5'b10010) ? 2'b10: 2'b00;	//turn on heating if T<=18
-       state = (temperature >= 5'b10110) ? 2'b01: 2'b00;	// turn on cooling if T>= 22
+       state = (temperature <= 5'b10010) ? 2'b10:	        //turn on heating if T<=18
+               (temperature >= 5'b10110) ? 2'b01: 2'b00;	// turn on cooling if T>= 22
       end
 
   else 
