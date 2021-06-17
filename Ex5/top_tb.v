@@ -52,7 +52,39 @@ forever
       err=1;
     end
 
-  if ((temperature==22)&& (cooling!=1))
+# (CLK_PERIOD)
+
+  if ((dir) && (temperature>=22)&& (cooling!=1))
+    begin
+      $display("***TEST FAILED!:( ***");
+      err=1;
+    end
+
+  if ((dir) && (temperature<=19)&& (heating!=1))
+    begin
+      $display("***TEST FAILED!:( ***");
+      err=1;
+    end
+
+  if ((dir) && ((temperature==20)|| (temperature==21)) && (cooling==1) && (heating==1))
+    begin
+      $display("***TEST FAILED!:( ***");
+      err=1;
+    end
+
+    if ((dir==0) && (temperature>=21)&& (cooling!=1))
+    begin
+      $display("***TEST FAILED!:( ***");
+      err=1;
+    end
+
+  if ((dir==0) && (temperature<=18)&& (heating!=1))
+    begin
+      $display("***TEST FAILED!:( ***");
+      err=1;
+    end
+
+  if ((dir==0) && ((temperature==19)|| (temperature==20)) && (cooling==1) && (heating==1))
     begin
       $display("***TEST FAILED!:( ***");
       err=1;
