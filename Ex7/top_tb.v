@@ -15,6 +15,7 @@ parameter CLK_PERIOD=10; // clock period set to 10 sim ticks
 // registers and wires
 reg clk, rst, sel, button, err;
 wire [23:0] light;
+reg [23:0] light_next;
 
 // clock generation
 initial
@@ -42,9 +43,25 @@ begin
 
 # (CLK_PERIOD*2)
   sel=1;	//switch to RGB mode
+  rst=0; 	//turn off reset, turn on enable
+  button=1;     // turn on button
 
-// test reset (rst=1)
-  if (light!= 24'h0000FF)
+forever
+begin 
+
+  # (CLK_PERIOD)
+  case(light)
+  24'h0000FF: light_next= 24'h00FF00;
+  24'h00FF00: light_next= 24'h00FFFF;
+  24'h00FFFF: light_next= 24'hFF0000;
+  24'hFF0000: light_next= 24'hFF00FF;
+  24'hFF00FF: light_next= 24'hFFFF00;
+  24'hFFFF00: light_next= 24'h0000FF;
+  endcase
+
+  # (CLK_PERIOD);
+  
+  if (light!= light_next)
   begin
       $display("***TEST FAILED!:( ***");
       err=1;
@@ -53,7 +70,7 @@ begin
 
 
 end
-
+end
 
 // finish test and check for success
 initial
