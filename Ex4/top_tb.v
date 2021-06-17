@@ -73,7 +73,7 @@ end
 
 end
 
-// finish test
+// finish test and check for success
 initial
 begin
     # (CLK_PERIOD*60);		//sim time 600ns
