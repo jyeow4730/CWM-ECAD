@@ -13,11 +13,14 @@ module top_tb();
 parameter CLK_PERIOD=10; // clock period set to 10 sim ticks
 
 // registers and wires
-reg clk_p, clk_n, err, dir;
+reg clk_p, err, dir;
 reg [2:0] state;
-reg temperature_0, temperature_1, temperature_2, temperature_3, temperature_4;
+//reg temperature_0, temperature_1, temperature_2, temperature_3, temperature_4;
 reg [4:0] temperature;
 wire heating, cooling; 
+
+wire clk_n;
+assign clk_n = ~clk_p;
 
 // clock generation
 initial 
@@ -25,7 +28,6 @@ begin
   clk_p=0;
   forever
   # (CLK_PERIOD/2) clk_p= ~clk_p;
-  clk_n= clk_p;
 end 
 
 //user logic
