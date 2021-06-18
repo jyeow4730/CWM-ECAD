@@ -12,7 +12,6 @@
 //           heating, cooling
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module top(
     input clk_p,
     input clk_n,
@@ -24,7 +23,7 @@ module top(
 
 //wire
   wire [4:0] temperature;
-  assign wire= {temperature_4, temperature_3, temperature_2, temperature_1, temperature_0} ; 
+  assign temperature = {temperature_4, temperature_3, temperature_2, temperature_1, temperature_0}; 
     
 
    /* clock infrastructure, do not modify */
